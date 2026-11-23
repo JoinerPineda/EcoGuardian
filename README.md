@@ -5,7 +5,7 @@ que limpia los ríos de Caldas: recoges la basura del suelo y la que baja por el
 llevas a la caneca correcta según el **código de colores de Colombia (Resolución 2184 de 2019)**.
 Si dejas que el río se contamine, pierdes.
 
-**▶ Jugar en el navegador:** [completar con el enlace de Vercel]
+**▶ Jugar en el navegador:** https://ecoguardian-fawn.vercel.app/
 
 ![Capturas de EcoGuardián](docs/capturas.png)
 
@@ -47,4 +47,4 @@ cómo volver a exportar) está en **[LEEME.md](LEEME.md)**.
 
 Proyecto Final · Programación para Videojuegos
 
-- [completar nombres del equipo]
+- Joiner Pineda Torres
