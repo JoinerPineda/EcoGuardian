@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Scripts/texto_flotante.gd" id="1_txt"]
+
+[sub_resource type="LabelSettings" id="Estilo_texto"]
+font_size = 8
+outline_size = 3
+outline_color = Color(0.05, 0.05, 0.08, 1)
+
+[node name="TextoFlotante" type="Node2D"]
+z_index = 20
+script = ExtResource("1_txt")
+
+[node name="Etiqueta" type="Label" parent="."]
+offset_left = -40.0
+offset_top = -12.0
+offset_right = 40.0
+offset_bottom = 0.0
+text = "+10"
+label_settings = SubResource("Estilo_texto")
+horizontal_alignment = 1

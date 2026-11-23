@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://Scripts/bolsa.gd" id="1_bol"]
+[ext_resource type="Texture2D" path="res://Assets/sombra.png" id="2_som"]
+[ext_resource type="Texture2D" path="res://Assets/bolsa.png" id="3_tex"]
+
+[sub_resource type="CircleShape2D" id="Forma_cuerpo"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="Forma_contacto"]
+radius = 9.0
+
+[node name="Bolsa" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_bol")
+
+[node name="Sombra" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.7)
+position = Vector2(0, -1)
+texture = ExtResource("2_som")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
+texture = ExtResource("3_tex")
+hframes = 5
+
+[node name="Colision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11)
+shape = SubResource("Forma_cuerpo")
+
+[node name="ZonaContacto" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Colision" type="CollisionShape2D" parent="ZonaContacto"]
+position = Vector2(0, -4)
+shape = SubResource("Forma_contacto")

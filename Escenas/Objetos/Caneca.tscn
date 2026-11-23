@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://Scripts/caneca.gd" id="1_can"]
+[ext_resource type="Texture2D" path="res://Assets/sombra.png" id="2_som"]
+[ext_resource type="Texture2D" path="res://Assets/canecas.png" id="3_tex"]
+
+[sub_resource type="RectangleShape2D" id="Forma_cuerpo"]
+size = Vector2(12, 6)
+
+[sub_resource type="CircleShape2D" id="Forma_zona"]
+radius = 16.0
+
+[sub_resource type="LabelSettings" id="Estilo_indicador"]
+font_size = 8
+font_color = Color(1, 0.9, 0.35, 1)
+outline_size = 3
+outline_color = Color(0.05, 0.05, 0.08, 1)
+
+[node name="Caneca" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_can")
+
+[node name="Sombra" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(1.2, 1)
+texture = ExtResource("2_som")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_tex")
+offset = Vector2(0, -12)
+hframes = 3
+
+[node name="Colision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("Forma_cuerpo")
+
+[node name="ZonaDeposito" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="Colision" type="CollisionShape2D" parent="ZonaDeposito"]
+position = Vector2(0, -2)
+shape = SubResource("Forma_zona")
+
+[node name="Indicador" type="Label" parent="."]
+visible = false
+offset_left = -6.0
+offset_top = -36.0
+offset_right = 6.0
+offset_bottom = -25.0
+text = "E"
+label_settings = SubResource("Estilo_indicador")
+horizontal_alignment = 1

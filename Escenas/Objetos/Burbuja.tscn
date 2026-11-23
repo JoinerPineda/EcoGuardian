@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Scripts/burbuja.gd" id="1_bur"]
+[ext_resource type="Texture2D" path="res://Assets/burbuja.png" id="2_tex"]
+
+[sub_resource type="CircleShape2D" id="Forma_burbuja"]
+radius = 4.0
+
+[node name="Burbuja" type="Area2D"]
+collision_layer = 16
+collision_mask = 5
+monitorable = false
+script = ExtResource("1_bur")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_tex")
+hframes = 2
+
+[node name="Colision" type="CollisionShape2D" parent="."]
+shape = SubResource("Forma_burbuja")
+
+[node name="Temporizador" type="Timer" parent="."]
+one_shot = true

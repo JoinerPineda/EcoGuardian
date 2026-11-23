@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://Scripts/residuo.gd" id="1_res"]
+[ext_resource type="Texture2D" path="res://Assets/sombra.png" id="2_som"]
+[ext_resource type="Texture2D" path="res://Assets/residuos.png" id="3_tex"]
+
+[sub_resource type="CircleShape2D" id="Forma_residuo"]
+radius = 6.0
+
+[node name="Residuo" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+monitorable = true
+script = ExtResource("1_res")
+
+[node name="Sombra" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.8, 1)
+texture = ExtResource("2_som")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+texture = ExtResource("3_tex")
+hframes = 15
+
+[node name="Colision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("Forma_residuo")

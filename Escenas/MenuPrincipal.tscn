@@ -1,0 +1,418 @@
+[gd_scene load_steps=28 format=3]
+
+[ext_resource type="Script" path="res://Scripts/menu_principal.gd" id="1_men"]
+[ext_resource type="Texture2D" path="res://Assets/estrellas.png" id="2_est"]
+[ext_resource type="TileSet" path="res://Assets/tileset.tres" id="3_til"]
+[ext_resource type="Shader" path="res://Shaders/agua.gdshader" id="4_sha"]
+[ext_resource type="SpriteFrames" path="res://Assets/jugador_frames.tres" id="5_jug"]
+[ext_resource type="Texture2D" path="res://Assets/residuos.png" id="6_res"]
+[ext_resource type="Texture2D" path="res://Assets/canecas.png" id="7_can"]
+[ext_resource type="Texture2D" path="res://Assets/portada_1.png" id="8_por"]
+[ext_resource type="Texture2D" path="res://Assets/nubes.png" id="9_nub"]
+[ext_resource type="Texture2D" path="res://Assets/logo.png" id="10_log"]
+[ext_resource type="PackedScene" path="res://Escenas/Interfaz/BotonSonido.tscn" id="11_bso"]
+
+[sub_resource type="AtlasTexture" id="Estrella_llena"]
+atlas = ExtResource("2_est")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="Estrella_vacia"]
+atlas = ExtResource("2_est")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="ShaderMaterial" id="Agua_limpia"]
+shader = ExtResource("4_sha")
+shader_parameter/contaminacion = 0.0
+shader_parameter/color_limpio = Color(0.22, 0.58, 0.86, 1)
+shader_parameter/color_medio = Color(0.3, 0.52, 0.42, 1)
+shader_parameter/color_sucio = Color(0.4, 0.33, 0.22, 1)
+shader_parameter/velocidad_corriente = 6.0
+
+[sub_resource type="AtlasTexture" id="Caneca_blanca"]
+atlas = ExtResource("7_can")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="Caneca_verde"]
+atlas = ExtResource("7_can")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="Caneca_negra"]
+atlas = ExtResource("7_can")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="LabelSettings" id="Texto_titulo"]
+font_size = 24
+font_color = Color(1, 0.96, 0.72, 1)
+outline_size = 7
+outline_color = Color(0.09, 0.24, 0.13, 1)
+shadow_size = 1
+shadow_color = Color(0.02, 0.08, 0.05, 0.6)
+shadow_offset = Vector2(2, 3)
+
+[sub_resource type="LabelSettings" id="Texto_subtitulo"]
+font_size = 9
+font_color = Color(0.85, 1, 0.75, 1)
+outline_size = 4
+outline_color = Color(0.06, 0.18, 0.1, 1)
+
+[sub_resource type="LabelSettings" id="Texto_pequeno"]
+font_size = 7
+outline_size = 2
+outline_color = Color(0.05, 0.05, 0.08, 1)
+
+[sub_resource type="LabelSettings" id="Texto_ayuda_titulo"]
+font_size = 12
+font_color = Color(1, 0.88, 0.4, 1)
+outline_size = 3
+outline_color = Color(0.1, 0.06, 0.02, 1)
+
+[sub_resource type="LabelSettings" id="Texto_leyenda"]
+font_size = 6
+outline_size = 2
+outline_color = Color(0.05, 0.05, 0.08, 1)
+
+[sub_resource type="StyleBoxFlat" id="Panel_opaco"]
+bg_color = Color(0.07, 0.11, 0.12, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.45, 0.75, 0.55, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="MenuPrincipal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_men")
+textura_estrella_llena = SubResource("Estrella_llena")
+textura_estrella_vacia = SubResource("Estrella_vacia")
+
+[node name="Fondo" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+mouse_filter = 2
+color = Color(0.1, 0.2, 0.19, 1)
+
+[node name="Portada" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+mouse_filter = 2
+texture = ExtResource("8_por")
+
+[node name="Nubes" type="Node2D" parent="."]
+
+[node name="Nube1" type="Sprite2D" parent="Nubes"]
+position = Vector2(60, 18)
+texture = ExtResource("9_nub")
+hframes = 2
+
+[node name="Nube2" type="Sprite2D" parent="Nubes"]
+modulate = Color(1, 1, 1, 0.85)
+position = Vector2(200, 44)
+texture = ExtResource("9_nub")
+hframes = 2
+frame = 1
+
+[node name="Nube3" type="Sprite2D" parent="Nubes"]
+modulate = Color(1, 1, 1, 0.7)
+position = Vector2(300, 28)
+scale = Vector2(-1, 1)
+texture = ExtResource("9_nub")
+hframes = 2
+
+[node name="Paisaje" type="Node2D" parent="."]
+
+[node name="Suelo" type="TileMapLayer" parent="Paisaje"]
+tile_set = ExtResource("3_til")
+
+[node name="Agua" type="TileMapLayer" parent="Paisaje"]
+material = SubResource("Agua_limpia")
+tile_set = ExtResource("3_til")
+
+[node name="Obstaculos" type="TileMapLayer" parent="Paisaje"]
+tile_set = ExtResource("3_til")
+
+[node name="Canecas" type="Node2D" parent="Paisaje"]
+position = Vector2(266, 120)
+
+[node name="Blanca" type="Sprite2D" parent="Paisaje/Canecas"]
+texture = SubResource("Caneca_blanca")
+
+[node name="Verde" type="Sprite2D" parent="Paisaje/Canecas"]
+position = Vector2(18, 0)
+texture = SubResource("Caneca_verde")
+
+[node name="Negra" type="Sprite2D" parent="Paisaje/Canecas"]
+position = Vector2(36, 0)
+texture = SubResource("Caneca_negra")
+
+[node name="Guardian" type="AnimatedSprite2D" parent="Paisaje"]
+position = Vector2(70, 136)
+sprite_frames = ExtResource("5_jug")
+animation = &"quieto_abajo"
+
+[node name="BasuraRio" type="Sprite2D" parent="Paisaje"]
+position = Vector2(-20, 170)
+texture = ExtResource("6_res")
+hframes = 15
+
+[node name="Titulo" type="Label" parent="."]
+layout_mode = 0
+offset_top = 6.0
+offset_right = 320.0
+offset_bottom = 42.0
+text = "ECOGUARDIÁN"
+label_settings = SubResource("Texto_titulo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitulo" type="Label" parent="."]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 320.0
+offset_bottom = 52.0
+text = "Limpia los ríos de Caldas"
+label_settings = SubResource("Texto_subtitulo")
+horizontal_alignment = 1
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 11.0
+offset_right = 76.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("10_log")
+
+[node name="Botones" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 56.0
+offset_right = 205.0
+offset_bottom = 104.0
+theme_override_constants/separation = 3
+
+[node name="Jugar" type="Button" parent="Botones"]
+layout_mode = 2
+text = "Jugar"
+
+[node name="ComoJugar" type="Button" parent="Botones"]
+layout_mode = 2
+text = "Cómo jugar"
+
+[node name="Salir" type="Button" parent="Botones"]
+layout_mode = 2
+text = "Salir"
+
+[node name="Record" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 90.0
+offset_bottom = 30.0
+mouse_filter = 2
+theme_override_constants/separation = 1
+
+[node name="Texto" type="Label" parent="Record"]
+layout_mode = 2
+text = "Mejor puntaje: 0"
+label_settings = SubResource("Texto_pequeno")
+
+[node name="Estrellas" type="HBoxContainer" parent="Record"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+
+[node name="Estrella1" type="TextureRect" parent="Record/Estrellas"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Estrella_vacia")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Estrella2" type="TextureRect" parent="Record/Estrellas"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Estrella_vacia")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Estrella3" type="TextureRect" parent="Record/Estrellas"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Estrella_vacia")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Creditos" type="Label" parent="."]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 2.0
+offset_right = 316.0
+offset_bottom = 12.0
+text = "Programación para Videojuegos"
+label_settings = SubResource("Texto_leyenda")
+horizontal_alignment = 2
+
+[node name="Resultados" type="Button" parent="."]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 13.0
+offset_right = 316.0
+offset_bottom = 25.0
+theme_override_font_sizes/font_size = 7
+text = "Resultados"
+
+[node name="BotonSonido" parent="." instance=ExtResource("11_bso")]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 27.0
+offset_right = 314.0
+offset_bottom = 43.0
+
+[node name="Participante" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 62.0
+offset_right = 108.0
+offset_bottom = 90.0
+theme_override_constants/separation = 2
+
+[node name="Nombre" type="Label" parent="Participante"]
+layout_mode = 2
+text = "Participante"
+label_settings = SubResource("Texto_pequeno")
+text_overrun_behavior = 3
+
+[node name="Acciones" type="HBoxContainer" parent="Participante"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TriviaFinal" type="Button" parent="Participante/Acciones"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 7
+text = "Trivia final"
+
+[node name="Cambiar" type="Button" parent="Participante/Acciones"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 7
+text = "Cambiar"
+
+[node name="PanelAyuda" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 316.0
+offset_bottom = 178.0
+theme_override_styles/panel = SubResource("Panel_opaco")
+
+[node name="Contenido" type="VBoxContainer" parent="PanelAyuda"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 3.0
+offset_right = -6.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 3
+
+[node name="Titulo" type="Label" parent="PanelAyuda/Contenido"]
+layout_mode = 2
+text = "CÓMO JUGAR"
+label_settings = SubResource("Texto_ayuda_titulo")
+horizontal_alignment = 1
+
+[node name="Controles" type="Label" parent="PanelAyuda/Contenido"]
+layout_mode = 2
+text = "Moverse: WASD o flechas  ·  Depositar: E  ·  Elegir residuo: Q, Tab o 1-2-3
+Burbujas de jabón: Espacio o clic  ·  Pausa: Esc  ·  Reiniciar: R  ·  Sonido: M"
+label_settings = SubResource("Texto_pequeno")
+horizontal_alignment = 1
+
+[node name="Reglas" type="Label" parent="PanelAyuda/Contenido"]
+layout_mode = 2
+text = "Recoge la basura del suelo y del río (máximo 3 en la mochila) y llévala a su caneca. Acierto: +10. Error: -5. Combo de 3 aciertos: +15. La basura sin recoger contamina el río: si llega a 100 % pierdes. Nivel 1: recicla 12. Nivel 2 (el pueblo): recicla 15 y cuidado con las bolsas voladoras, ¡te quitan residuos!"
+label_settings = SubResource("Texto_pequeno")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Leyenda" type="HBoxContainer" parent="PanelAyuda/Contenido"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="Blanca" type="VBoxContainer" parent="PanelAyuda/Contenido/Leyenda"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+
+[node name="Icono" type="TextureRect" parent="PanelAyuda/Contenido/Leyenda/Blanca"]
+layout_mode = 2
+texture = SubResource("Caneca_blanca")
+stretch_mode = 3
+
+[node name="Texto" type="Label" parent="PanelAyuda/Contenido/Leyenda/Blanca"]
+layout_mode = 2
+text = "BLANCA - aprovechables
+Plástico, vidrio, metal, papel y cartón (limpios y secos)"
+label_settings = SubResource("Texto_leyenda")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Verde" type="VBoxContainer" parent="PanelAyuda/Contenido/Leyenda"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+
+[node name="Icono" type="TextureRect" parent="PanelAyuda/Contenido/Leyenda/Verde"]
+layout_mode = 2
+texture = SubResource("Caneca_verde")
+stretch_mode = 3
+
+[node name="Texto" type="Label" parent="PanelAyuda/Contenido/Leyenda/Verde"]
+layout_mode = 2
+text = "VERDE - orgánicos
+Cáscaras, restos de comida, pulpa de café, hojas y poda"
+label_settings = SubResource("Texto_leyenda")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Negra" type="VBoxContainer" parent="PanelAyuda/Contenido/Leyenda"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+
+[node name="Icono" type="TextureRect" parent="PanelAyuda/Contenido/Leyenda/Negra"]
+layout_mode = 2
+texture = SubResource("Caneca_negra")
+stretch_mode = 3
+
+[node name="Texto" type="Label" parent="PanelAyuda/Contenido/Leyenda/Negra"]
+layout_mode = 2
+text = "NEGRA - no aprovechables
+Servilletas usadas, metalizados, icopor sucio, tapabocas"
+label_settings = SubResource("Texto_leyenda")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Volver" type="Button" parent="PanelAyuda/Contenido"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Volver (Esc)"

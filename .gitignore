@@ -1,0 +1,15 @@
+# Caché de Godot 4 (se regenera al abrir el proyecto)
+.godot/
+
+# Archivos temporales y de sistema
+*.tmp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Credenciales de exportación (nunca se suben)
+export_credentials.cfg
+
+# Pruebas locales
+_pruebas/
+__pycache__/

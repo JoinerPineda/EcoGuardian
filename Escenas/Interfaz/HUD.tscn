@@ -1,0 +1,298 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" path="res://Assets/corazones.png" id="2_cor"]
+[ext_resource type="Texture2D" path="res://Assets/residuos.png" id="3_res"]
+[ext_resource type="Texture2D" path="res://Assets/iman.png" id="4_iman"]
+
+[sub_resource type="AtlasTexture" id="Corazon_lleno"]
+atlas = ExtResource("2_cor")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="Corazon_vacio"]
+atlas = ExtResource("2_cor")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="Icono_iman"]
+atlas = ExtResource("4_iman")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="StyleBoxFlat" id="Ranura_normal"]
+bg_color = Color(0.06, 0.09, 0.1, 0.75)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.45, 0.55, 0.5, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="Ranura_seleccionada"]
+bg_color = Color(0.2, 0.3, 0.18, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.85, 0.3, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="Barra_fondo"]
+bg_color = Color(0.05, 0.05, 0.08, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.7, 0.7, 0.7, 1)
+
+[sub_resource type="StyleBoxFlat" id="Barra_relleno"]
+bg_color = Color(0.35, 0.85, 0.4, 1)
+
+[sub_resource type="LabelSettings" id="Texto_pequeno"]
+font_size = 7
+outline_size = 2
+outline_color = Color(0.05, 0.05, 0.08, 1)
+
+[sub_resource type="LabelSettings" id="Texto_combo"]
+font_size = 16
+font_color = Color(1, 0.85, 0.3, 1)
+outline_size = 4
+outline_color = Color(0.3, 0.1, 0.05, 1)
+
+[sub_resource type="LabelSettings" id="Texto_mensaje"]
+font_size = 8
+outline_size = 3
+outline_color = Color(0.05, 0.05, 0.08, 1)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+textura_corazon_lleno = SubResource("Corazon_lleno")
+textura_corazon_vacio = SubResource("Corazon_vacio")
+textura_residuos = ExtResource("3_res")
+estilo_ranura = SubResource("Ranura_normal")
+estilo_ranura_seleccionada = SubResource("Ranura_seleccionada")
+
+[node name="BarraSuperior" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 16.0
+mouse_filter = 2
+color = Color(0.03, 0.06, 0.05, 0.55)
+
+[node name="Corazones" type="HBoxContainer" parent="BarraSuperior"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 32.0
+offset_bottom = 12.0
+mouse_filter = 2
+theme_override_constants/separation = 1
+
+[node name="Corazon1" type="TextureRect" parent="BarraSuperior/Corazones"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Corazon_lleno")
+stretch_mode = 2
+
+[node name="Corazon2" type="TextureRect" parent="BarraSuperior/Corazones"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Corazon_lleno")
+stretch_mode = 2
+
+[node name="Corazon3" type="TextureRect" parent="BarraSuperior/Corazones"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Corazon_lleno")
+stretch_mode = 2
+
+[node name="Puntaje" type="Label" parent="BarraSuperior"]
+offset_left = 34.0
+offset_top = 2.0
+offset_right = 94.0
+offset_bottom = 14.0
+text = "Puntos 0"
+vertical_alignment = 1
+
+[node name="EtiquetaContaminacion" type="Label" parent="BarraSuperior"]
+offset_left = 98.0
+offset_top = 0.0
+offset_right = 200.0
+offset_bottom = 9.0
+text = "Contaminación"
+label_settings = SubResource("Texto_pequeno")
+
+[node name="BarraContaminacion" type="ProgressBar" parent="BarraSuperior"]
+offset_left = 98.0
+offset_top = 9.0
+offset_right = 210.0
+offset_bottom = 14.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("Barra_fondo")
+theme_override_styles/fill = SubResource("Barra_relleno")
+value = 25.0
+show_percentage = false
+
+[node name="PorcentajeContaminacion" type="Label" parent="BarraSuperior"]
+offset_left = 212.0
+offset_top = 2.0
+offset_right = 236.0
+offset_bottom = 14.0
+text = "25%"
+vertical_alignment = 1
+
+[node name="Reciclados" type="Label" parent="BarraSuperior"]
+offset_left = 238.0
+offset_top = 2.0
+offset_right = 316.0
+offset_bottom = 14.0
+text = "Reciclados 0/25"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Mochila" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 4.0
+offset_top = 156.0
+offset_right = 160.0
+offset_bottom = 176.0
+mouse_filter = 2
+
+[node name="Ranura1" type="Panel" parent="Mochila"]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Ranura_normal")
+
+[node name="Icono" type="TextureRect" parent="Mochila/Ranura1"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 18.0
+offset_bottom = 18.0
+mouse_filter = 2
+stretch_mode = 2
+
+[node name="Numero" type="Label" parent="Mochila/Ranura1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 0.0
+text = "1"
+label_settings = SubResource("Texto_pequeno")
+
+[node name="Ranura2" type="Panel" parent="Mochila"]
+layout_mode = 0
+offset_left = 22.0
+offset_right = 42.0
+offset_bottom = 20.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Ranura_normal")
+
+[node name="Icono" type="TextureRect" parent="Mochila/Ranura2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 18.0
+offset_bottom = 18.0
+mouse_filter = 2
+stretch_mode = 2
+
+[node name="Numero" type="Label" parent="Mochila/Ranura2"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 0.0
+text = "2"
+label_settings = SubResource("Texto_pequeno")
+
+[node name="Ranura3" type="Panel" parent="Mochila"]
+layout_mode = 0
+offset_left = 44.0
+offset_right = 64.0
+offset_bottom = 20.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Ranura_normal")
+
+[node name="Icono" type="TextureRect" parent="Mochila/Ranura3"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 18.0
+offset_bottom = 18.0
+mouse_filter = 2
+stretch_mode = 2
+
+[node name="Numero" type="Label" parent="Mochila/Ranura3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 0.0
+text = "3"
+label_settings = SubResource("Texto_pequeno")
+
+[node name="NombreSeleccion" type="Label" parent="Mochila"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 4.0
+offset_right = 168.0
+offset_bottom = 16.0
+text = "Mochila vacía"
+label_settings = SubResource("Texto_pequeno")
+vertical_alignment = 1
+
+[node name="AyudaCaneca" type="Label" parent="."]
+offset_left = 150.0
+offset_top = 154.0
+offset_right = 316.0
+offset_bottom = 176.0
+text = "Caneca VERDE: orgánicos
+[E] depositar"
+label_settings = SubResource("Texto_pequeno")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Mensaje" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 20.0
+offset_right = 316.0
+offset_bottom = 32.0
+text = "Mensaje"
+label_settings = SubResource("Texto_mensaje")
+horizontal_alignment = 1
+
+[node name="Combo" type="Label" parent="."]
+offset_left = 60.0
+offset_top = 50.0
+offset_right = 260.0
+offset_bottom = 74.0
+text = "¡COMBO x3!"
+label_settings = SubResource("Texto_combo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Iman" type="HBoxContainer" parent="."]
+offset_left = 268.0
+offset_top = 34.0
+offset_right = 316.0
+offset_bottom = 50.0
+mouse_filter = 2
+alignment = 2
+
+[node name="Icono" type="TextureRect" parent="Iman"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Icono_iman")
+stretch_mode = 2
+
+[node name="Tiempo" type="Label" parent="Iman"]
+layout_mode = 2
+text = "8.0s"
+vertical_alignment = 1

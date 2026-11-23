@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://Shaders/agua.gdshader" id="1_l1w6q"]
+
+[resource]
+shader = ExtResource("1_l1w6q")
+shader_parameter/contaminacion = 0.25
+shader_parameter/color_limpio = Color(0.22, 0.58, 0.86, 1)
+shader_parameter/color_medio = Color(0.3, 0.52, 0.42, 1)
+shader_parameter/color_sucio = Color(0.4, 0.33, 0.22, 1)
+shader_parameter/velocidad_corriente = 6.0
+shader_parameter/direccion_corriente = Vector2(1, 0)

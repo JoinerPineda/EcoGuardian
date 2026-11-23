@@ -1,0 +1,56 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://Scripts/juego.gd" id="1_jue"]
+[ext_resource type="PackedScene" path="res://Escenas/Objetos/TextoFlotante.tscn" id="2_txt"]
+[ext_resource type="PackedScene" path="res://Escenas/Mapa.tscn" id="3_map"]
+[ext_resource type="PackedScene" path="res://Escenas/Personajes/Jugador.tscn" id="4_jug"]
+[ext_resource type="Script" path="res://Scripts/generador_residuos.gd" id="5_gres"]
+[ext_resource type="PackedScene" path="res://Escenas/Objetos/Residuo.tscn" id="6_res"]
+[ext_resource type="Script" path="res://Scripts/generador_flotantes.gd" id="7_gflo"]
+[ext_resource type="PackedScene" path="res://Escenas/Objetos/ResiduoFlotante.tscn" id="8_flo"]
+[ext_resource type="Script" path="res://Scripts/generador_enemigos.gd" id="9_gene"]
+[ext_resource type="PackedScene" path="res://Escenas/Personajes/Mancha.tscn" id="10_man"]
+[ext_resource type="PackedScene" path="res://Escenas/Interfaz/HUD.tscn" id="11_hud"]
+[ext_resource type="PackedScene" path="res://Escenas/Interfaz/MenuPausa.tscn" id="12_pau"]
+[ext_resource type="PackedScene" path="res://Escenas/Interfaz/PantallaFinal.tscn" id="13_fin"]
+
+[node name="Juego" type="Node2D"]
+script = ExtResource("1_jue")
+escena_texto = ExtResource("2_txt")
+
+[node name="Ambiente" type="CanvasModulate" parent="."]
+
+[node name="Mapa" parent="." instance=ExtResource("3_map")]
+
+[node name="Jugador" parent="Mapa" instance=ExtResource("4_jug")]
+position = Vector2(296, 360)
+
+[node name="GeneradorResiduos" type="Node" parent="." node_paths=PackedStringArray("mapa")]
+script = ExtResource("5_gres")
+escena_residuo = ExtResource("6_res")
+mapa = NodePath("../Mapa")
+
+[node name="Temporizador" type="Timer" parent="GeneradorResiduos"]
+one_shot = true
+
+[node name="GeneradorFlotantes" type="Node" parent="." node_paths=PackedStringArray("mapa")]
+script = ExtResource("7_gflo")
+escena_flotante = ExtResource("8_flo")
+mapa = NodePath("../Mapa")
+
+[node name="Temporizador" type="Timer" parent="GeneradorFlotantes"]
+one_shot = true
+
+[node name="GeneradorEnemigos" type="Node" parent="." node_paths=PackedStringArray("mapa")]
+script = ExtResource("9_gene")
+escena_mancha = ExtResource("10_man")
+mapa = NodePath("../Mapa")
+
+[node name="Temporizador" type="Timer" parent="GeneradorEnemigos"]
+one_shot = true
+
+[node name="HUD" parent="." instance=ExtResource("11_hud")]
+
+[node name="MenuPausa" parent="." instance=ExtResource("12_pau")]
+
+[node name="PantallaFinal" parent="." instance=ExtResource("13_fin")]

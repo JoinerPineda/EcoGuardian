@@ -1,0 +1,137 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://Scripts/pantalla_final.gd" id="1_fin"]
+[ext_resource type="Texture2D" path="res://Assets/estrellas.png" id="2_est"]
+
+[sub_resource type="AtlasTexture" id="Estrella_llena"]
+atlas = ExtResource("2_est")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="Estrella_vacia"]
+atlas = ExtResource("2_est")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="LabelSettings" id="Texto_titulo"]
+font_size = 16
+outline_size = 4
+outline_color = Color(0.05, 0.08, 0.1, 1)
+
+[sub_resource type="LabelSettings" id="Texto_normal"]
+font_size = 8
+outline_size = 2
+outline_color = Color(0.05, 0.05, 0.08, 1)
+
+[sub_resource type="LabelSettings" id="Texto_dato"]
+font_size = 7
+font_color = Color(0.75, 0.95, 0.85, 1)
+outline_size = 2
+outline_color = Color(0.05, 0.05, 0.08, 1)
+
+[node name="PantallaFinal" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+script = ExtResource("1_fin")
+textura_estrella_llena = SubResource("Estrella_llena")
+textura_estrella_vacia = SubResource("Estrella_vacia")
+
+[node name="Fondo" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0.02, 0.04, 0.05, 0.7)
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 16.0
+offset_top = 6.0
+offset_right = 304.0
+offset_bottom = 174.0
+
+[node name="Contenido" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = -8.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 3
+
+[node name="Titulo" type="Label" parent="Panel/Contenido"]
+layout_mode = 2
+text = "¡RÍO LIMPIO!"
+label_settings = SubResource("Texto_titulo")
+horizontal_alignment = 1
+
+[node name="Motivo" type="Label" parent="Panel/Contenido"]
+layout_mode = 2
+text = "Motivo"
+label_settings = SubResource("Texto_normal")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Estrellas" type="HBoxContainer" parent="Panel/Contenido"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Estrella1" type="TextureRect" parent="Panel/Contenido/Estrellas"]
+layout_mode = 2
+texture = SubResource("Estrella_llena")
+stretch_mode = 2
+
+[node name="Estrella2" type="TextureRect" parent="Panel/Contenido/Estrellas"]
+layout_mode = 2
+texture = SubResource("Estrella_llena")
+stretch_mode = 2
+
+[node name="Estrella3" type="TextureRect" parent="Panel/Contenido/Estrellas"]
+layout_mode = 2
+texture = SubResource("Estrella_vacia")
+stretch_mode = 2
+
+[node name="Estadisticas" type="Label" parent="Panel/Contenido"]
+layout_mode = 2
+text = "Puntaje: 0
+Precisión: 0%
+Tiempo: 0:00"
+label_settings = SubResource("Texto_normal")
+horizontal_alignment = 1
+
+[node name="Record" type="Label" parent="Panel/Contenido"]
+layout_mode = 2
+text = "Mejor puntaje: 0"
+label_settings = SubResource("Texto_normal")
+horizontal_alignment = 1
+
+[node name="Dato" type="Label" parent="Panel/Contenido"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+text = "Sabías que..."
+label_settings = SubResource("Texto_dato")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Botones" type="HBoxContainer" parent="Panel/Contenido"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Siguiente" type="Button" parent="Panel/Contenido/Botones"]
+visible = false
+layout_mode = 2
+text = "Siguiente nivel"
+
+[node name="TriviaFinal" type="Button" parent="Panel/Contenido/Botones"]
+visible = false
+layout_mode = 2
+text = "Trivia final"
+
+[node name="Reiniciar" type="Button" parent="Panel/Contenido/Botones"]
+layout_mode = 2
+text = "Jugar de nuevo (Enter/R)"
+
+[node name="Menu" type="Button" parent="Panel/Contenido/Botones"]
+layout_mode = 2
+text = "Menú (Esc)"

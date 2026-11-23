@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3]
+
+[ext_resource type="Texture2D" path="res://Assets/mancha.png" id="1_25t4d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4w6t2"]
+atlas = ExtResource("1_25t4d")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03e67"]
+atlas = ExtResource("1_25t4d")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8v2le"]
+atlas = ExtResource("1_25t4d")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy24e"]
+atlas = ExtResource("1_25t4d")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ia4mn"]
+atlas = ExtResource("1_25t4d")
+region = Rect2(48, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4w6t2")
+}],
+"loop": true,
+"name": &"golpe",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03e67")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8v2le")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vy24e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ia4mn")
+}],
+"loop": true,
+"name": &"mover",
+"speed": 6.0
+}]

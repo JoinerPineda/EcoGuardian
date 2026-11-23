@@ -1,0 +1,6 @@
+# Godot usa saltos de línea LF; así Git no los cambia en Windows
+* text=auto eol=lf
+*.png binary
+*.wav binary
+*.wasm binary
+*.pck binary
